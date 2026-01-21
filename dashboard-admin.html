@@ -1,132 +1,156 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard Admin | Satuan Pelayanan Pariaman</title>
+<meta charset="UTF-8">
+<title>Dashboard Admin | Satpel Pariaman</title>
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-  <!-- Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+body {
+  background:#f2f5f9;
+}
 
-  <style>
-    body {
-      background-color: #f4f6f9;
-    }
+/* HEADER */
+.header {
+  background: linear-gradient(135deg,#0b3c5d,#114e7a);
+  color:white;
+  padding:15px 30px;
+  position:relative;
+}
 
-    .header-kemenhub {
-      background: linear-gradient(135deg, #0b3c5d, #1f6fa8);
-      color: white;
-      padding: 20px;
-      position: relative;
-    }
+/* AKSEN MINANG (GONJONG) */
+.header::after{
+  content:"";
+  position:absolute;
+  bottom:-12px;
+  left:0;
+  right:0;
+  height:12px;
+  background:
+    repeating-linear-gradient(
+      60deg,
+      #d4af37,
+      #d4af37 12px,
+      #0b3c5d 12px,
+      #0b3c5d 24px
+    );
+}
 
-    .header-kemenhub::after {
-      content: "";
-      position: absolute;
-      bottom: -20px;
-      left: 0;
-      right: 0;
-      height: 20px;
-      background: repeating-linear-gradient(
-        45deg,
-        #cfa44a,
-        #cfa44a 10px,
-        #0b3c5d 10px,
-        #0b3c5d 20px
-      );
-    }
+/* LOGO */
+.logo {
+  height:55px;
+}
 
-    .card-menu {
-      border: none;
-      border-radius: 18px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
-    }
+/* JUDUL */
+.title {
+  text-align:center;
+  line-height:1.3;
+}
+.title h5 {
+  margin:0;
+  font-weight:700;
+}
+.title small {
+  font-size:13px;
+  opacity:0.9;
+}
 
-    .card-menu:hover {
-      transform: translateY(-5px);
-    }
+/* JAM */
+.clock-box {
+  text-align:right;
+}
+#clock {
+  font-size:18px;
+  font-weight:600;
+}
+#date {
+  font-size:13px;
+}
 
-    .icon-big {
-      font-size: 48px;
-      color: #0b3c5d;
-    }
+/* CARD */
+.menu-card {
+  border:none;
+  border-radius:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  transition:.3s;
+}
+.menu-card:hover {
+  transform:translateY(-6px);
+}
 
-    .btn-menu {
-      border-radius: 12px;
-      padding: 12px;
-      font-weight: 600;
-    }
-  </style>
+.icon-big {
+  font-size:52px;
+  color:#0b3c5d;
+}
+</style>
 </head>
+
 <body>
 
 <!-- HEADER -->
-<div class="header-kemenhub">
-  <div class="container d-flex align-items-center justify-content-between">
-    <div>
-      <h5 class="mb-0 fw-bold">Satuan Pelayanan Pariaman</h5>
+<div class="header">
+  <div class="d-flex align-items-center justify-content-between">
+
+    <!-- LOGO KEMENHUB -->
+    <img src="assets/logo-kemenhub.png" class="logo" alt="Kemenhub">
+
+    <!-- TITLE -->
+    <div class="title">
+      <h5>SATUAN PELAYANAN PARIAMAN</h5>
       <small>
         Balai Teknik Perkeretaapian Kelas II Padang<br>
-        Kementerian Perhubungan RI
+        Kementerian Perhubungan Republik Indonesia
       </small>
     </div>
 
-    <!-- LOGO (sementara teks, nanti ganti img) -->
-    <div class="fw-bold">
-      <i class="bi bi-train-front-fill fs-2"></i>
-    </div>
+    <!-- LOGO BTP -->
+    <img src="assets/logo-btp-padang.png" class="logo" alt="BTP Padang">
+
+  </div>
+
+  <!-- CLOCK -->
+  <div class="clock-box mt-2">
+    <div id="clock"></div>
+    <div id="date"></div>
+    <input type="date" class="form-control form-control-sm mt-1" style="max-width:160px;">
   </div>
 </div>
 
 <!-- CONTENT -->
 <div class="container mt-5">
-  <h4 class="mb-4 fw-bold">Dashboard Admin</h4>
-
   <div class="row g-4">
 
-    <!-- DATA PENGADUAN -->
     <div class="col-md-6">
-      <div class="card card-menu p-4 h-100">
-        <div class="text-center">
-          <i class="bi bi-clipboard-data icon-big"></i>
-          <h5 class="mt-3 fw-bold">Data Pengaduan</h5>
-          <p class="text-muted">
-            Akses seluruh laporan pengaduan masyarakat.
-          </p>
-          <a href="https://docs.google.com/spreadsheets/d/GANTI_ID_SHEET"
-             target="_blank"
-             class="btn btn-primary btn-menu w-100">
-             Lihat Data Pengaduan
-          </a>
-        </div>
+      <div class="card menu-card p-4 text-center">
+        <i class="bi bi-clipboard-data icon-big"></i>
+        <h5 class="mt-3 fw-bold">Data Pengaduan</h5>
+        <p class="text-muted">Laporan masyarakat</p>
+        <a href="https://docs.google.com/spreadsheets/d/GANTI_ID_SHEET"
+           target="_blank"
+           class="btn btn-primary btn-lg w-100">
+          Buka Data
+        </a>
       </div>
     </div>
 
-    <!-- DOKUMEN -->
     <div class="col-md-6">
-      <div class="card card-menu p-4 h-100">
-        <div class="text-center">
-          <i class="bi bi-folder2-open icon-big"></i>
-          <h5 class="mt-3 fw-bold">Dokumen & Arsip</h5>
-          <p class="text-muted">
-            Akses dokumen internal dan arsip kerja.
-          </p>
-          <a href="https://drive.google.com"
-             target="_blank"
-             class="btn btn-outline-primary btn-menu w-100">
-             Buka Google Drive
-          </a>
-        </div>
+      <div class="card menu-card p-4 text-center">
+        <i class="bi bi-folder2-open icon-big"></i>
+        <h5 class="mt-3 fw-bold">Dokumen & Arsip</h5>
+        <p class="text-muted">Dokumen internal</p>
+        <a href="https://drive.google.com"
+           target="_blank"
+           class="btn btn-outline-primary btn-lg w-100">
+          Buka Drive
+        </a>
       </div>
     </div>
 
   </div>
 
-  <!-- LOGOUT -->
-  <div class="mt-5 text-end">
+  <div class="text-end mt-4">
     <button onclick="logout()" class="btn btn-danger btn-lg">
       <i class="bi bi-box-arrow-right"></i> Logout
     </button>
@@ -138,6 +162,19 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="auth.js"></script>
 <script src="guard.js"></script>
+
+<!-- CLOCK SCRIPT -->
+<script>
+function updateClock(){
+  const now = new Date();
+  document.getElementById("clock").innerText =
+    now.toLocaleTimeString("id-ID");
+  document.getElementById("date").innerText =
+    now.toLocaleDateString("id-ID",{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+setInterval(updateClock,1000);
+updateClock();
+</script>
 
 </body>
 </html>
