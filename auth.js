@@ -14,7 +14,15 @@ function login(){
 }
 
 function logout(){
-  firebase.auth().signOut().then(() => {
-    window.location.replace("index.html");
-  });
+  firebase.auth().signOut()
+    .then(() => {
+      // kembali ke dashboard utama
+      window.location.replace("index.html");
+    })
+    .catch((error) => {
+      alert("Logout gagal");
+      console.error(error);
+    });
 }
+
+
