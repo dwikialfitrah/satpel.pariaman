@@ -135,18 +135,31 @@ footer a:hover{
 </div>
 
 <!-- LOGIN -->
-<div class="login-wrapper">
-  <div class="login-box">
-    <h3>Login</h3>
+<form onsubmit="event.preventDefault(); login();">
 
-    <input id="email" type="email" class="form-control mb-3" placeholder="Email">
-    <input id="password" type="password" class="form-control mb-3" placeholder="Password">
+  <input
+    id="email"
+    type="email"
+    class="form-control mb-3"
+    placeholder="Email"
+    required
+  >
 
-    <button onclick="login()" class="btn btn-login w-100 text-white">
-      Masuk
-    </button>
+  <input
+    id="password"
+    type="password"
+    class="form-control mb-3"
+    placeholder="Password"
+    required
+  >
 
-    <div id="error"></div>
+  <button type="submit" class="btn btn-login w-100 text-white">
+    Masuk
+  </button>
+
+</form>
+
+<div id="Email/Password Salah"></div>
   </div>
 </div>
 
@@ -192,4 +205,5 @@ footer a:hover{
 
 </body>
 </html>
+
 
