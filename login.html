@@ -4,46 +4,46 @@
 <meta charset="UTF-8">
 <title>Login | Satuan Pelayanan Pariaman</title>
 
+<!-- Anti cache (BIAR LOGIN TIDAK DISIMPAN) -->
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 <!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-<!-- Font Profesional -->
+<!-- Font -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --maroon:#7a1f2b;
   --gold:#d4af37;
-  --blue:#0b3c5d;
 }
 
 body{
   font-family:'Inter',sans-serif;
-  background:#f4f6f9;
   min-height:100vh;
   display:flex;
   flex-direction:column;
+  background:#f4f6f9;
 }
 
 /* HEADER */
 .header{
   background:var(--maroon);
   color:white;
-  padding:22px 40px;
+  padding:20px 40px;
 }
 .header-inner{
   display:flex;
   align-items:center;
 }
 .header-inner img{
-  height:46px;
+  height:44px;
   margin-right:10px;
 }
-.header-title{
-  margin-left:15px;
-}
-.header-title h5{
+.header-title h6{
   margin:0;
   font-weight:700;
 }
@@ -51,14 +51,13 @@ body{
   opacity:.9;
 }
 
-/* LOGIN BOX */
+/* LOGIN */
 .login-wrapper{
   flex:1;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 }
-
 .login-box{
   background:white;
   padding:40px;
@@ -67,36 +66,25 @@ body{
   border-radius:20px;
   box-shadow:0 15px 35px rgba(0,0,0,.15);
 }
-
 .login-box h3{
-  font-weight:700;
   text-align:center;
-  color:var(--blue);
   margin-bottom:25px;
+  font-weight:700;
 }
-
 .form-control{
   height:52px;
-  font-size:16px;
 }
-
 .btn-login{
   height:52px;
-  font-weight:600;
-  font-size:16px;
   background:var(--maroon);
   border:none;
+  font-weight:600;
 }
-
-.btn-login:hover{
-  background:#5f1721;
-}
-
 #error{
-  color:red;
-  font-size:14px;
   margin-top:10px;
   text-align:center;
+  color:red;
+  font-size:14px;
 }
 
 /* FOOTER */
@@ -105,15 +93,8 @@ footer{
   color:white;
 }
 footer img{
-  height:40px;
+  height:38px;
   margin-right:10px;
-}
-footer a{
-  color:#ccc;
-  text-decoration:none;
-}
-footer a:hover{
-  color:var(--gold);
 }
 </style>
 </head>
@@ -126,73 +107,41 @@ footer a:hover{
     <img src="assets/logo-kemenhub.png">
     <img src="assets/logo-djka.png">
     <img src="assets/logo-btp-padang.png">
-
-    <div class="header-title">
-      <h5>Satuan Pelayanan Pariaman</h5>
+    <div class="header-title ms-3">
+      <h6>Satuan Pelayanan Pariaman</h6>
       <small>Balai Teknik Perkeretaapian Kelas II Padang</small>
     </div>
   </div>
 </div>
 
-<!-- LOGIN -->
-<form onsubmit="event.preventDefault(); login();">
+<!-- LOGIN FORM -->
+<div class="login-wrapper">
+  <div class="login-box">
 
-  <input
-    id="email"
-    type="email"
-    class="form-control mb-3"
-    placeholder="Email"
-    required
-  >
+    <h3>Login</h3>
 
-  <input
-    id="password"
-    type="password"
-    class="form-control mb-3"
-    placeholder="Password"
-    required
-  >
+    <!-- FORM (ENTER = MASUK) -->
+    <form onsubmit="event.preventDefault(); login();">
+      <input id="email" type="email" class="form-control mb-3" placeholder="Email" required>
+      <input id="password" type="password" class="form-control mb-3" placeholder="Password" required>
 
-  <button type="submit" class="btn btn-login w-100 text-white">
-    Masuk
-  </button>
+      <button type="submit" class="btn btn-login w-100 text-white">
+        Masuk
+      </button>
+    </form>
 
-</form>
+    <div id="error"></div>
 
-<div id="Email/Password Salah"></div>
   </div>
 </div>
 
 <!-- FOOTER -->
 <footer class="pt-4 pb-3">
   <div class="container">
-    <div class="row mb-3">
-      <div class="col-md-4">
-        <img src="assets/logo-kemenhub.png">
-        <img src="assets/logo-djka.png">
-        <img src="assets/logo-btp-padang.png">
-        <h6 class="mt-3">Balai Teknik Perkeretaapian Kelas II Padang</h6>
-        <p>Satuan Pelayanan Pariaman</p>
-      </div>
-
-      <div class="col-md-4">
-        <h6>Ikuti Kami</h6>
-        <p>
-          <i class="bi bi-instagram"></i> Instagram<br>
-          <i class="bi bi-youtube"></i> YouTube
-        </p>
-      </div>
-
-      <div class="col-md-4">
-        <iframe
-          src="https://www.google.com/maps?q=Balai Teknik Perkeretaapian Padang&output=embed"
-          width="100%" height="160" style="border:0;" allowfullscreen>
-        </iframe>
-      </div>
-    </div>
-
-    <hr>
-    <p class="text-center small">
+    <img src="assets/logo-kemenhub.png">
+    <img src="assets/logo-djka.png">
+    <img src="assets/logo-btp-padang.png">
+    <p class="mt-3 mb-0">
       © 2026 Balai Teknik Perkeretaapian Kelas II Padang – Satuan Pelayanan Pariaman
     </p>
   </div>
@@ -201,9 +150,8 @@ footer a:hover{
 <!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
 <script src="auth.js"></script>
 
 </body>
 </html>
-
-
