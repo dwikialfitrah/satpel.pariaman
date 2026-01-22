@@ -1,11 +1,3 @@
-/* =====================================================
-   AUTH.JS – SATPEL PARIAMAN
-   Login, Logout, Session Handling (AMAN)
-   ===================================================== */
-
-/* =======================
-   LOGIN
-   ======================= */
 function login() {
   const emailEl = document.getElementById("email");
   const passwordEl = document.getElementById("password");
@@ -42,9 +34,6 @@ function login() {
     });
 }
 
-/* =======================
-   LOGOUT (AMAN)
-   ======================= */
 function logout() {
   firebase.auth().signOut()
     .then(() => {
@@ -59,11 +48,6 @@ function logout() {
     });
 }
 
-/* =======================
-   PROTEKSI TAMBAHAN (OPSIONAL)
-   Mencegah halaman dashboard
-   ditampilkan dari cache browser
-   ======================= */
 (function preventBackCache() {
   if (window.history && window.history.pushState) {
     window.history.pushState(null, "", window.location.href);
@@ -72,3 +56,4 @@ function logout() {
     };
   }
 })();
+
