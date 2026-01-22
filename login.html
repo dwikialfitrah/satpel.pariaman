@@ -26,6 +26,31 @@ body{
   flex-direction:column;
 }
 
+/* HEADER */
+.header{
+  background:var(--blue);
+  color:white;
+  padding:22px 40px;
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+}
+.header-inner img{
+  height:46px;
+  margin-right:10px;
+}
+.header-title{
+  margin-left:15px;
+}
+.header-title h5{
+  margin:0;
+  font-weight:700;
+}
+.header-title small{
+  opacity:.9;
+}
+
 /* LOGIN BOX */
 .login-wrapper{
   flex:1;
@@ -95,10 +120,24 @@ footer a:hover{
 
 <body>
 
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <img src="assets/logo-kemenhub.png">
+    <img src="assets/logo-djka.png">
+    <img src="assets/logo-btp-padang.png">
+
+    <div class="header-title">
+      <h5>Satuan Pelayanan Pariaman</h5>
+      <small>Balai Teknik Perkeretaapian Kelas II Padang</small>
+    </div>
+  </div>
+</div>
+
 <!-- LOGIN -->
 <div class="login-wrapper">
   <div class="login-box">
-    <h3>Login Sistem</h3>
+    <h3>Login</h3>
 
     <input id="email" type="email" class="form-control mb-3" placeholder="Email">
     <input id="password" type="password" class="form-control mb-3" placeholder="Password">
@@ -111,7 +150,7 @@ footer a:hover{
   </div>
 </div>
 
-<!-- FOOTER (SAMA DENGAN DASHBOARD) -->
+<!-- FOOTER -->
 <footer class="pt-4 pb-3">
   <div class="container">
     <div class="row mb-3">
