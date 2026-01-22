@@ -8,14 +8,14 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-<!-- Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --blue:#0b3c5d;
-  --gold:#d4af37;
   --maroon:#7a1f2b;
+  --gold:#d4af37;
+  --blue-dark:#0b1f33;
 }
 
 body{
@@ -23,29 +23,42 @@ body{
   background:#f4f6f9;
 }
 
+/* ===== HEADER ===== */
+.top-header{
+  background:var(--blue-dark);
+  color:white;
+  padding:15px 30px;
+}
+.brand-title{
+  font-family:'Orbitron',sans-serif;
+  font-size:18px;
+  letter-spacing:1px;
+}
+
 /* ===== NAVBAR ===== */
 .navbar{
-  background:linear-gradient(135deg,var(--blue),#132f4c);
+  background:var(--maroon);
 }
 .navbar-brand img{
   height:42px;
   margin-right:8px;
 }
 .nav-link{
-  color:#fff!important;
-  font-weight:500;
+  color:white!important;
+  margin:0 6px;
+  padding:8px 16px!important;
+  border-radius:20px;
+  background:rgba(255,255,255,0.12);
+  font-family:'Orbitron',sans-serif;
+  font-size:13px;
 }
 .nav-link:hover{
-  color:var(--gold)!important;
+  background:var(--gold);
+  color:#000!important;
 }
 
-/* ===== HERO SLIDER ===== */
-.hero{
-  position:relative;
-  overflow:hidden;
-}
+/* ===== HERO ===== */
 .hero img{
-  width:100%;
   height:520px;
   object-fit:cover;
   filter:brightness(.6);
@@ -55,19 +68,15 @@ body{
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  text-align:center;
   color:white;
+  text-align:center;
 }
 .hero-text h1{
-  font-weight:800;
-  letter-spacing:2px;
-}
-.hero-text p{
-  font-size:18px;
-  opacity:.9;
+  font-family:'Orbitron',sans-serif;
+  font-size:38px;
 }
 
-/* ===== AKSEN MINANG ===== */
+/* ===== MINANG AKSEN ===== */
 .minang-divider{
   height:14px;
   background:repeating-linear-gradient(
@@ -79,39 +88,23 @@ body{
   );
 }
 
-/* ===== SECTION ===== */
-.section-title{
-  font-weight:700;
-  color:var(--blue);
-}
-
-/* ===== CARD ===== */
-.card-custom{
-  border:none;
-  border-radius:18px;
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
-}
-.card-custom i{
-  font-size:40px;
-  color:var(--blue);
-}
-
-/* ===== GALLERY ===== */
-.gallery img{
-  border-radius:16px;
-  transition:.3s;
-}
-.gallery img:hover{
-  transform:scale(1.05);
+/* ===== GALERI ===== */
+.gallery-row img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
 }
 
 /* ===== FOOTER ===== */
 footer{
-  background:#0b1f33;
+  background:var(--blue-dark);
   color:white;
 }
+footer h6{
+  font-family:'Orbitron',sans-serif;
+}
 footer a{
-  color:#ddd;
+  color:#ccc;
   text-decoration:none;
 }
 footer a:hover{
@@ -122,119 +115,97 @@ footer a:hover{
 
 <body>
 
-<!-- ===== NAVBAR ===== -->
-<nav class="navbar navbar-expand-lg navbar-dark px-4">
-  <a class="navbar-brand d-flex align-items-center" href="#">
-    <img src="assets/logo-kemenhub.png">
-    <img src="assets/logo-djka.png">
-    <img src="assets/logo-btp-padang.png">
-  </a>
-
-  <div class="collapse navbar-collapse">
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item"><a class="nav-link" href="#">Beranda</a></li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profil</a>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item">Ruang Lingkup</a></li>
-          <li><a class="dropdown-item">Tugas & Fungsi</a></li>
-          <li><a class="dropdown-item">Struktur Organisasi</a></li>
-          <li><a class="dropdown-item">Sejarah</a></li>
-        </ul>
-      </li>
-      <li class="nav-item"><a class="nav-link" href="#">Informasi</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
-    </ul>
+<!-- ===== TOP HEADER ===== -->
+<div class="top-header d-flex align-items-center justify-content-between">
+  <div class="d-flex align-items-center">
+    <img src="assets/logo-kemenhub.png" height="40">
+    <img src="assets/logo-djka.png" height="40" class="ms-2">
+    <img src="assets/logo-btp-padang.png" height="40" class="ms-2">
   </div>
+  <div class="brand-title">
+    SATUAN PELAYANAN PARIAMAN<br>
+    <small>Balai Teknik Perkeretaapian Kelas II Padang</small>
+  </div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg px-4">
+  <ul class="navbar-nav ms-auto">
+    <li class="nav-item"><a class="nav-link">Beranda</a></li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profil</a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item">Ruang Lingkup</a></li>
+        <li><a class="dropdown-item">Tugas & Fungsi</a></li>
+        <li><a class="dropdown-item">Struktur Organisasi</a></li>
+        <li><a class="dropdown-item">Sejarah</a></li>
+      </ul>
+    </li>
+    <li class="nav-item"><a class="nav-link">Informasi</a></li>
+    <li class="nav-item"><a class="nav-link">Login</a></li>
+  </ul>
 </nav>
 
 <!-- ===== HERO SLIDER ===== -->
-<div id="heroCarousel" class="carousel slide hero" data-bs-ride="carousel" data-bs-interval="10000">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="assets/slide1.jpg">
-    </div>
-    <div class="carousel-item">
-      <img src="assets/slide2.jpg">
-    </div>
-    <div class="carousel-item">
-      <img src="assets/slide3.jpg">
-    </div>
-  </div>
-
-  <button class="carousel-control-prev" data-bs-target="#heroCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </button>
-  <button class="carousel-control-next" data-bs-target="#heroCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </button>
-
-  <div class="hero-text">
-    <h1>SATUAN PELAYANAN PARIAMAN</h1>
-    <p>Balai Teknik Perkeretaapian Kelas II Padang</p>
+<div id="heroCarousel" class="carousel slide position-relative" data-bs-ride="carousel" data-bs-interval="10000">
+  <div class="carousel-inner hero">
+    <div class="carousel-item active"><img src="assets/slide1.jpg" class="w-100"></div>
+    <div class="carousel-item"><img src="assets/slide2.jpg" class="w-100"></div>
+    <div class="carousel-item"><img src="assets/slide3.jpg" class="w-100"></div>
   </div>
 </div>
 
 <div class="minang-divider"></div>
 
-<!-- ===== PENGADUAN ===== -->
-<div class="container my-5">
-  <h3 class="section-title mb-4 text-center">Pusat Pengaduan</h3>
-
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card card-custom p-4">
-        <input class="form-control mb-3" placeholder="Nama">
-        <input class="form-control mb-3" placeholder="Email / No HP">
-        <textarea class="form-control mb-3" rows="4" placeholder="Isi Pengaduan"></textarea>
-        <button class="btn btn-primary btn-lg">Kirim Pengaduan</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- ===== GALERI ===== -->
-<div class="container my-5">
-  <h3 class="section-title mb-4 text-center">Galeri Kegiatan</h3>
-
-  <div class="row g-4 gallery">
-    <div class="col-md-4">
-      <a href="#">
-        <img src="assets/slide1.jpg" class="img-fluid">
-      </a>
-    </div>
-    <div class="col-md-4">
-      <a href="#">
-        <img src="assets/slide2.jpg" class="img-fluid">
-      </a>
-    </div>
-    <div class="col-md-4">
-      <a href="#">
-        <img src="assets/slide3.jpg" class="img-fluid">
-      </a>
-    </div>
+<div class="container-fluid my-5">
+  <h3 class="text-center mb-4" style="font-family:'Orbitron',sans-serif;">Galeri Kegiatan</h3>
+  <div class="row g-0 gallery-row">
+    <div class="col-md-4"><img src="assets/slide1.jpg"></div>
+    <div class="col-md-4"><img src="assets/slide2.jpg"></div>
+    <div class="col-md-4"><img src="assets/slide3.jpg"></div>
   </div>
 </div>
 
 <!-- ===== FOOTER ===== -->
-<footer class="pt-5 pb-3">
+<footer class="pt-5">
   <div class="container">
     <div class="row">
+
       <div class="col-md-4">
-        <h6>Kementerian Perhubungan RI</h6>
-        <p>Satuan Pelayanan Pariaman<br>Balai Teknik Perkeretaapian Kelas II Padang</p>
+        <div class="d-flex mb-3">
+          <img src="assets/logo-kemenhub.png" height="40">
+          <img src="assets/logo-djka.png" height="40" class="ms-2">
+          <img src="assets/logo-btp-padang.png" height="40" class="ms-2">
+        </div>
+        <p>
+          <strong>Balai Teknik Perkeretaapian Kelas II Padang</strong><br>
+          Satuan Pelayanan Pariaman
+        </p>
       </div>
+
       <div class="col-md-4">
-        <h6>Tautan</h6>
-        <p><a href="#">DJKA</a><br><a href="#">Kemenhub</a></p>
+        <h6>Tautan Lainnya</h6>
+        <p>Direktorat Jenderal Perkeretaapian<br>Kementerian Perhubungan RI</p>
       </div>
+
       <div class="col-md-4">
-        <h6>Kontak</h6>
-        <p>Email: info@kemenhub.go.id</p>
+        <h6>Ikuti Kami</h6>
+        <a href="#">Instagram</a><br>
+        <a href="#">YouTube</a>
       </div>
+
     </div>
+
+    <div class="my-4">
+      <iframe 
+        src="https://www.google.com/maps?q=Kementerian+Perhubungan&output=embed"
+        width="100%" height="200" style="border:0;" loading="lazy">
+      </iframe>
+    </div>
+
     <hr>
-    <p class="text-center small">© 2026 Kementerian Perhubungan RI</p>
+    <p class="text-center small">© 2026 Balai Teknik Perkeretaapian Kelas II Padang</p>
   </div>
 </footer>
 
