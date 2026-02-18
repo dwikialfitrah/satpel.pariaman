@@ -125,7 +125,14 @@ footer img{
 
     <form onsubmit="event.preventDefault(); login();">
       <input id="email" type="email" class="form-control mb-3" placeholder="Email" required>
-      <input id="password" type="password" class="form-control mb-3" placeholder="Password" required>
+      <div class="position-relative mb-3">
+  <input id="password" type="password" class="form-control pe-5" placeholder="Password" required>
+
+  <span id="togglePassword"
+        style="position:absolute; right:15px; top:50%; transform:translateY(-50%); cursor:pointer;">
+    <i class="bi bi-eye"></i>
+  </span>
+</div>
 
       <button type="submit" class="btn btn-login w-100 text-white">
         Masuk
@@ -172,3 +179,4 @@ firebase.initializeApp(firebaseConfig);
 
 </body>
 </html>
+
