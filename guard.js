@@ -2,8 +2,7 @@
 // DAFTAR EMAIL ADMIN (HARUS SAMA DENGAN auth.js)
 // ===============================
 const adminEmails = [
-  "admin1@email.com",
-  "admin2@email.com"
+  "dwiki.alfitrah070101@gmail.com"
 ];
 
 
@@ -34,3 +33,4 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 
 });
+
