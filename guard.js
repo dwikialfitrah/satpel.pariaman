@@ -1,36 +1,27 @@
-// ===============================
-// DAFTAR EMAIL ADMIN (HARUS SAMA DENGAN auth.js)
-// ===============================
 const adminEmails = [
   "dwiki.alfitrah070101@gmail.com"
 ];
 
-
-// ===============================
-// GUARD PROTECTION
-// ===============================
 firebase.auth().onAuthStateChanged(function(user) {
 
   if (!user) {
-    window.location.replace("index.html");
+    window.location.href = "index.html";
     return;
   }
-
-  const currentPage = window.location.pathname;
 
   const isAdmin = adminEmails.includes(user.email);
+  const currentPage = window.location.pathname;
 
-  // Jika user biasa mencoba akses dashboard admin
-  if (currentPage.includes("dashboard-admin.html") && !isAdmin) {
-    window.location.replace("dashboard-user.html");
+  // Cegah user biasa buka dashboard-admin
+  if (currentPage.includes("dashboard-admin") && !isAdmin) {
+    window.location.href = "dashboard-user.html";
     return;
   }
 
-  // Jika admin membuka dashboard user
-  if (currentPage.includes("dashboard-user.html") && isAdmin) {
-    window.location.replace("dashboard-admin.html");
+  // Cegah admin buka dashboard-user
+  if (currentPage.includes("dashboard-user") && isAdmin) {
+    window.location.href = "dashboard-admin.html";
     return;
   }
 
 });
-
