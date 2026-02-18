@@ -1,6 +1,5 @@
 const adminEmails = [
-  "admin1@email.com",
-  "admin2@email.com"
+  "dwiki.alfitrah070101@gmail.com"
 ];
 
 firebase.auth().onAuthStateChanged(function(user) {
@@ -28,3 +27,4 @@ firebase.auth().onAuthStateChanged(function(user) {
   // Jika lolos semua pengecekan, tampilkan halaman
   document.body.style.display = "block";
 });
+
