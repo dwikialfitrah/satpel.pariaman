@@ -1,5 +1,6 @@
 const adminEmails = [
-  "dwiki.alfitrah070101@gmail.com"
+  "admin1@email.com",
+  "admin2@email.com"
 ];
 
 firebase.auth().onAuthStateChanged(function(user) {
@@ -12,16 +13,18 @@ firebase.auth().onAuthStateChanged(function(user) {
   const isAdmin = adminEmails.includes(user.email);
   const currentPage = window.location.pathname;
 
-  // Cegah user biasa buka dashboard-admin
+  // Jika user biasa buka dashboard-admin
   if (currentPage.includes("dashboard-admin") && !isAdmin) {
     window.location.href = "dashboard-user.html";
     return;
   }
 
-  // Cegah admin buka dashboard-user
+  // Jika admin buka dashboard-user
   if (currentPage.includes("dashboard-user") && isAdmin) {
     window.location.href = "dashboard-admin.html";
     return;
   }
 
+  // Jika lolos semua pengecekan, tampilkan halaman
+  document.body.style.display = "block";
 });
