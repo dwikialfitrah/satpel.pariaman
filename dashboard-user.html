@@ -6,56 +6,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --navy:#0f1f3d;
-  --navy-dark:#0b172d;
-  --maroon:#b00020;
-  --grey:#f4f6f9;
+  --maroon:#7a1f2b;
+  --gold:#d4af37;
+  --blue:#0b3c5d;
 }
 
 body{
   font-family:'Inter',sans-serif;
-  background:var(--grey);
+  background:#f4f6f9;
   margin:0;
-  transition:.4s;
-}
-
-/* DARK MODE */
-body.dark{
-  background:#111827;
-  color:white;
-}
-body.dark .content{
-  background:#111827;
-}
-body.dark .card-bubble{
-  background:#1f2937;
-  color:white;
 }
 
 /* TOPBAR */
 .topbar{
-  background:linear-gradient(90deg,#0f1f3d,#132a52);
+  background:var(--blue);
   color:white;
-  padding:14px 30px;
+  padding:18px 30px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  box-shadow:0 4px 20px rgba(0,0,0,.2);
+}
+
+.topbar-title{
+  font-weight:700;
+  font-size:18px;
 }
 
 .logout-btn{
-  color:var(--maroon);
+  color:red;
   font-weight:700;
   cursor:pointer;
-  transition:.3s;
-}
-.logout-btn:hover{
-  text-shadow:0 0 10px rgba(176,0,32,.8);
-  transform:scale(1.1);
 }
 
 /* LAYOUT */
@@ -66,22 +51,22 @@ body.dark .card-bubble{
 
 /* SIDEBAR */
 .sidebar{
-  width:240px;
-  background:var(--navy-dark);
+  width:230px;
+  background:#0b1f33;
   color:white;
   padding-top:25px;
-  box-shadow:3px 0 20px rgba(0,0,0,.1);
 }
 
 .sidebar-item{
   padding:14px 25px;
   cursor:pointer;
-  transition:.3s;
-  position:relative;
+  transition:.2s;
 }
+
 .sidebar-item:hover{
-  background:rgba(255,255,255,.05);
+  background:rgba(255,255,255,.08);
 }
+
 .sidebar-item.active{
   background:var(--maroon);
 }
@@ -90,100 +75,46 @@ body.dark .card-bubble{
 .content{
   flex:1;
   padding:40px;
-  background:var(--grey);
-  transition:.4s;
 }
 
-/* SECTION TRANSITION */
+/* BUBBLE CARD */
+.card-bubble{
+  border:none;
+  border-radius:18px;
+  padding:40px 20px;
+  text-align:center;
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
+  transition:.25s;
+  cursor:pointer;
+}
+
+.card-bubble:hover{
+  transform:translateY(-6px);
+}
+
+/* SECTION HIDE */
 .section{
   display:none;
-  animation:fadeSlide .4s ease;
 }
 .section.active{
   display:block;
 }
 
-@keyframes fadeSlide{
-  from{opacity:0; transform:translateY(10px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* CARD */
-.card-bubble{
-  background:white;
-  border-radius:22px;
-  padding:45px 20px;
-  text-align:center;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
-  cursor:pointer;
-  transition:.35s cubic-bezier(.4,0,.2,1);
-}
-.card-bubble:hover{
-  transform:translateY(-12px) scale(1.03);
-  box-shadow:0 25px 60px rgba(0,0,0,.2);
-}
-
-.icon-circle{
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  background:var(--navy);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin:0 auto 18px;
-  transition:.4s;
-}
-.card-bubble:hover .icon-circle{
-  box-shadow:0 0 25px rgba(15,31,61,.7);
-}
-
-/* CHAT */
-.chat-container{
-  background:white;
-  border-radius:22px;
-  padding:20px;
-  height:60vh;
-  display:flex;
-  flex-direction:column;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
-}
-.chat-messages{
-  flex:1;
-  overflow-y:auto;
-  margin-bottom:15px;
-}
-.chat-input{
-  display:flex;
-}
-.chat-input input{
-  flex:1;
-  padding:10px;
-  border-radius:10px;
-  border:1px solid #ccc;
-}
-.chat-input button{
-  margin-left:10px;
-  border:none;
-  background:var(--maroon);
-  color:white;
-  padding:10px 18px;
-  border-radius:10px;
-}
-
-/* FOOTER */
+/* FOOTER (SAMA INDEX) */
 footer{
   background:#0b1f33;
   color:white;
-  text-align:center;
-  padding:20px;
+}
+footer img{
+  height:42px;
+  margin-right:10px;
 }
 footer a{
-  color:white;
+  color:#ccc;
   text-decoration:none;
 }
 footer a:hover{
-  color:#ffd966;
+  color:var(--gold);
 }
 </style>
 </head>
@@ -192,13 +123,12 @@ footer a:hover{
 
 <!-- TOPBAR -->
 <div class="topbar">
-  <div>
+  <div class="topbar-title">
     SATUAN PELAYANAN PARIAMAN
   </div>
 
   <div class="d-flex align-items-center gap-4">
     <div id="clock"></div>
-    <button class="btn btn-sm btn-light" onclick="toggleDark()">Dark Mode</button>
     <div class="logout-btn" data-bs-toggle="modal" data-bs-target="#logoutModal">
       LOGOUT
     </div>
@@ -218,67 +148,112 @@ footer a:hover{
   <!-- CONTENT -->
   <div class="content">
 
+    <!-- DASHBOARD -->
     <div id="dashboard" class="section active">
       <div class="row g-4">
         <div class="col-md-4">
-          <div class="card-bubble" onclick="openLink('https://skemaraja.dephub.go.id/')">
-            <div class="icon-circle"></div>
+          <div class="card card-bubble" onclick="openLink('https://skemaraja.dephub.go.id/')">
             SKEMA RAJA
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card-bubble" onclick="openLink('https://sik.dephub.go.id/')">
-            <div class="icon-circle"></div>
+          <div class="card card-bubble" onclick="openLink('https://sik.dephub.go.id/')">
             SISTEM INFORMASI KEMENHUB
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card-bubble" onclick="openLink('https://e-kinerja.kemenhub.go.id/')">
-            <div class="icon-circle"></div>
+          <div class="card card-bubble" onclick="openLink('https://e-kinerja.kemenhub.go.id/')">
             E-KINERJA
           </div>
         </div>
       </div>
     </div>
 
+    <!-- PUSAT DATA -->
     <div id="pusat" class="section">
       <div class="row g-4">
-        <div class="col-md-6"><div class="card-bubble">Peta Lintas</div></div>
-        <div class="col-md-6"><div class="card-bubble">Rekap Nota Dinas</div></div>
-        <div class="col-md-6"><div class="card-bubble">Laporan Bulanan</div></div>
-        <div class="col-md-6"><div class="card-bubble">Laporan Kegiatan</div></div>
-        <div class="col-md-6"><div class="card-bubble">Data Perlintasan</div></div>
-      </div>
-    </div>
-
-    <div id="input" class="section">
-      <div class="card-bubble text-center">
-        FORM INPUT DATA<br><br>
-        <button class="btn btn-secondary">Segera Hadir</button>
-      </div>
-    </div>
-
-    <div id="chatbot" class="section">
-      <div class="chat-container">
-        <h5>Chatbot AI Satpel</h5>
-        <div class="chat-messages" id="chatMessages"></div>
-        <div class="chat-input">
-          <input type="text" id="chatInput" placeholder="Tulis pesan...">
-          <button onclick="sendMessage()">Kirim</button>
+        <div class="col-md-6">
+          <div class="card card-bubble" onclick="openLink('https://drive.google.com/drive/folders/1eoIjRHJngsbGNzQo6TNSnDwa6nyTb4KJ')">
+            Peta Lintas
+          </div>
         </div>
+        <div class="col-md-6">
+          <div class="card card-bubble" onclick="openLink('https://docs.google.com/spreadsheets/d/1pneesRJrhFeS4-WNYqeqa76uVJJMv3_x')">
+            Rekap Nota Dinas
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card card-bubble" onclick="openLink('https://drive.google.com/drive/folders/13Sh9otz8JNZJohSV8Wgqvf900uKLK7Pk')">
+            Laporan Bulanan
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card card-bubble" onclick="openLink('https://drive.google.com/drive/folders/12NjhV4GROcWBqbtUNIhK7SN5FYyalDDB')">
+            Laporan Kegiatan
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card card-bubble" onclick="openLink('https://docs.google.com/spreadsheets/d/1uJ1GKJ2YYaWXPxGJOj6qe_grzT4Z4rl4')">
+            Data Perlintasan
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INPUT -->
+    <div id="input" class="section">
+      <div class="card card-bubble text-center">
+        FORM INPUT DATA
+      </div>
+    </div>
+
+    <!-- CHATBOT -->
+    <div id="chatbot" class="section">
+      <div class="card card-bubble text-center">
+        CHATBOT AI (SIAP DIKEMBANGKAN)
       </div>
     </div>
 
   </div>
 </div>
 
-<footer>
-  © 2026 Balai Teknik Perkeretaapian Kelas II Padang – Satuan Pelayanan Pariaman <br>
-  <a href="https://www.instagram.com/btppadang/" target="_blank">Instagram</a> |
-  <a href="https://www.youtube.com/@btppadang" target="_blank">YouTube</a>
+<!-- FOOTER (IDENTIK INDEX) -->
+<footer class="pt-5 pb-3">
+  <div class="container">
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <img src="assets/logo-kemenhub.png">
+        <img src="assets/logo-djka.png">
+        <img src="assets/logo-btp-padang.png">
+        <h6 class="mt-3">Balai Teknik Perkeretaapian Kelas II Padang</h6>
+        <p>Satuan Pelayanan Pariaman</p>
+      </div>
+      <div class="col-md-4">
+        <h6>Ikuti Kami</h6>
+        <p>
+          <a href="https://www.instagram.com/btppadang/" target="_blank">
+            <i class="bi bi-instagram"></i> Instagram
+          </a><br>
+          <a href="https://www.youtube.com/@btppadang" target="_blank">
+            <i class="bi bi-youtube"></i> YouTube
+          </a>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <iframe
+          src="https://www.google.com/maps?q=Balai Teknik Perkeretaapian Padang&output=embed"
+          width="100%" height="180" style="border:0;" allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+    <hr>
+    <p class="text-center small">
+      © 2026 Balai Teknik Perkeretaapian Kelas II Padang – Satuan Pelayanan Pariaman
+    </p>
+  </div>
 </footer>
 
-<!-- MODAL -->
+<!-- MODAL LOGOUT -->
 <div class="modal fade" id="logoutModal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content text-center p-4">
@@ -314,27 +289,12 @@ function logout(){
 }
 
 function updateClock(){
-  const now=new Date();
-  document.getElementById('clock').innerText=
-  now.toLocaleDateString('id-ID')+" "+now.toLocaleTimeString('id-ID');
+  const now = new Date();
+  document.getElementById("clock").innerText =
+    now.toLocaleTimeString("id-ID");
 }
 setInterval(updateClock,1000);
 updateClock();
-
-function toggleDark(){
-  document.body.classList.toggle('dark');
-}
-
-function sendMessage(){
-  const input=document.getElementById('chatInput');
-  const msg=input.value.trim();
-  if(!msg) return;
-  const container=document.getElementById('chatMessages');
-  container.innerHTML+=`<div><b>Anda:</b> ${msg}</div>`;
-  container.innerHTML+=`<div><b>Bot:</b> (AI siap dihubungkan API)</div><br>`;
-  container.scrollTop=container.scrollHeight;
-  input.value="";
-}
 </script>
 
 </body>
