@@ -1,3 +1,4 @@
+// ===== LOGIN =====
 function login() {
   const emailEl = document.getElementById("email");
   const passwordEl = document.getElementById("password");
@@ -19,12 +20,20 @@ function login() {
   }
 
   firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(() => {
-      /* 
-        Pakai replace supaya:
-        - Tidak bisa kembali ke login via tombol Back
-      */
-      window.location.replace("dashboard-user.html");
+    .then((userCredential) => {
+
+      const user = userCredential.user;
+
+      // ===== ROLE CHECK SEDERHANA =====
+      // Ganti email ini dengan email admin Anda
+      const adminEmail = "admin@email.com";
+
+      if (user.email === adminEmail) {
+        window.location.replace("dashboard-admin.html");
+      } else {
+        window.location.replace("dashboard-user.html");
+      }
+
     })
     .catch((error) => {
       if (errorEl) {
@@ -34,12 +43,11 @@ function login() {
     });
 }
 
+
+// ===== LOGOUT (VERSI AMAN) =====
 function logout() {
   firebase.auth().signOut()
     .then(() => {
-      /*
-        replace() = tidak bisa kembali ke dashboard
-      */
       window.location.replace("index.html");
     })
     .catch((error) => {
@@ -48,6 +56,8 @@ function logout() {
     });
 }
 
+
+// ===== PREVENT BACK BUTTON =====
 (function preventBackCache() {
   if (window.history && window.history.pushState) {
     window.history.pushState(null, "", window.location.href);
@@ -56,4 +66,3 @@ function logout() {
     };
   }
 })();
-
