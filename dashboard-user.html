@@ -3,129 +3,150 @@
 <head>
 <meta charset="UTF-8">
 <title>Dashboard User | Satpel Pariaman</title>
-
-<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --navy:#0f1f3d;
-  --maroon:#7a1f2b;
+  --navy-dark:#0b172d;
+  --maroon:#b00020;
+  --grey:#f4f6f9;
 }
 
 body{
   font-family:'Inter',sans-serif;
+  background:var(--grey);
   margin:0;
-  background:#f4f6f9;
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
+  transition:.4s;
 }
 
-/* ================= TOPBAR ================= */
-.topbar{
-  background:var(--navy);
+/* DARK MODE */
+body.dark{
+  background:#111827;
   color:white;
-  padding:12px 25px;
+}
+body.dark .content{
+  background:#111827;
+}
+body.dark .card-bubble{
+  background:#1f2937;
+  color:white;
+}
+
+/* TOPBAR */
+.topbar{
+  background:linear-gradient(90deg,#0f1f3d,#132a52);
+  color:white;
+  padding:14px 30px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  box-shadow:0 4px 20px rgba(0,0,0,.2);
 }
 
-.topbar-left{
-  display:flex;
-  align-items:center;
-}
-.topbar-left img{
-  height:35px;
-  margin-right:8px;
-}
-.topbar-title{
+.logout-btn{
+  color:var(--maroon);
   font-weight:700;
-  margin-left:10px;
-}
-
-.user-menu{
-  position:relative;
   cursor:pointer;
+  transition:.3s;
 }
-.user-dropdown{
-  display:none;
-  position:absolute;
-  right:0;
-  top:30px;
-  background:white;
-  color:black;
-  padding:10px;
-  border-radius:8px;
-  box-shadow:0 10px 20px rgba(0,0,0,.15);
-}
-.user-menu:hover .user-dropdown{
-  display:block;
+.logout-btn:hover{
+  text-shadow:0 0 10px rgba(176,0,32,.8);
+  transform:scale(1.1);
 }
 
-/* ================= LAYOUT ================= */
+/* LAYOUT */
 .main-wrapper{
   display:flex;
-  flex:1;
+  min-height:calc(100vh - 120px);
 }
 
 /* SIDEBAR */
 .sidebar{
-  width:220px;
-  background:white;
-  box-shadow:2px 0 10px rgba(0,0,0,.05);
-  padding-top:20px;
+  width:240px;
+  background:var(--navy-dark);
+  color:white;
+  padding-top:25px;
+  box-shadow:3px 0 20px rgba(0,0,0,.1);
 }
 
 .sidebar-item{
-  padding:12px 20px;
+  padding:14px 25px;
   cursor:pointer;
-  font-weight:600;
-  transition:.2s;
+  transition:.3s;
+  position:relative;
 }
 .sidebar-item:hover{
-  background:#f1f1f1;
+  background:rgba(255,255,255,.05);
 }
 .sidebar-item.active{
   background:var(--maroon);
-  color:white;
 }
 
 /* CONTENT */
 .content{
   flex:1;
   padding:40px;
+  background:var(--grey);
+  transition:.4s;
 }
 
-/* CARD BUBBLE */
+/* SECTION TRANSITION */
+.section{
+  display:none;
+  animation:fadeSlide .4s ease;
+}
+.section.active{
+  display:block;
+}
+
+@keyframes fadeSlide{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* CARD */
 .card-bubble{
   background:white;
-  padding:30px;
-  border-radius:18px;
-  box-shadow:0 10px 25px rgba(0,0,0,.1);
-  cursor:pointer;
-  transition:.25s;
+  border-radius:22px;
+  padding:45px 20px;
   text-align:center;
-  font-weight:600;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  cursor:pointer;
+  transition:.35s cubic-bezier(.4,0,.2,1);
 }
 .card-bubble:hover{
-  transform:translateY(-6px);
-  box-shadow:0 18px 40px rgba(0,0,0,.15);
+  transform:translateY(-12px) scale(1.03);
+  box-shadow:0 25px 60px rgba(0,0,0,.2);
 }
 
-/* CHATBOT */
+.icon-circle{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:var(--navy);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:0 auto 18px;
+  transition:.4s;
+}
+.card-bubble:hover .icon-circle{
+  box-shadow:0 0 25px rgba(15,31,61,.7);
+}
+
+/* CHAT */
 .chat-container{
   background:white;
-  border-radius:18px;
-  box-shadow:0 10px 25px rgba(0,0,0,.1);
+  border-radius:22px;
   padding:20px;
   height:60vh;
   display:flex;
   flex-direction:column;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 .chat-messages{
   flex:1;
@@ -169,29 +190,24 @@ footer a:hover{
 
 <body>
 
-<!-- ================= TOPBAR ================= -->
+<!-- TOPBAR -->
 <div class="topbar">
-  <div class="topbar-left">
-    <img src="assets/logo-kemenhub.png">
-    <img src="assets/logo-djka.png">
-    <img src="assets/logo-btp-padang.png">
-    <div class="topbar-title">SATUAN PELAYANAN PARIAMAN</div>
+  <div>
+    SATUAN PELAYANAN PARIAMAN
   </div>
 
-  <div class="d-flex align-items-center">
-    <div id="clock" class="me-3"></div>
-    <div class="user-menu">
-      User ▾
-      <div class="user-dropdown">
-        <div onclick="logout()" style="cursor:pointer;">Logout</div>
-      </div>
+  <div class="d-flex align-items-center gap-4">
+    <div id="clock"></div>
+    <button class="btn btn-sm btn-light" onclick="toggleDark()">Dark Mode</button>
+    <div class="logout-btn" data-bs-toggle="modal" data-bs-target="#logoutModal">
+      LOGOUT
     </div>
   </div>
 </div>
 
 <div class="main-wrapper">
 
-  <!-- ================= SIDEBAR ================= -->
+  <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="sidebar-item active" onclick="showSection('dashboard')">Dashboard</div>
     <div class="sidebar-item" onclick="showSection('pusat')">Pusat Data</div>
@@ -199,51 +215,50 @@ footer a:hover{
     <div class="sidebar-item" onclick="showSection('chatbot')">Chatbot AI</div>
   </div>
 
-  <!-- ================= CONTENT ================= -->
+  <!-- CONTENT -->
   <div class="content">
 
-    <!-- DASHBOARD -->
-    <div id="dashboardSection">
+    <div id="dashboard" class="section active">
       <div class="row g-4">
         <div class="col-md-4">
           <div class="card-bubble" onclick="openLink('https://skemaraja.dephub.go.id/')">
+            <div class="icon-circle"></div>
             SKEMA RAJA
           </div>
         </div>
         <div class="col-md-4">
           <div class="card-bubble" onclick="openLink('https://sik.dephub.go.id/')">
-            SISTEM INFORMASI KEMENHUB (SIK)
+            <div class="icon-circle"></div>
+            SISTEM INFORMASI KEMENHUB
           </div>
         </div>
         <div class="col-md-4">
           <div class="card-bubble" onclick="openLink('https://e-kinerja.kemenhub.go.id/')">
-            E-KINERJA KEMENHUB
+            <div class="icon-circle"></div>
+            E-KINERJA
           </div>
         </div>
       </div>
     </div>
 
-    <!-- PUSAT DATA -->
-    <div id="pusatSection" style="display:none;">
-      <div class="row g-3">
-        <div class="col-md-6"><div class="card-bubble" onclick="openLink('https://drive.google.com/drive/folders/1eoIjRHJngsbGNzQo6TNSnDwa6nyTb4KJ')">Peta Lintas</div></div>
-        <div class="col-md-6"><div class="card-bubble" onclick="openLink('https://docs.google.com/spreadsheets/d/1pneesRJrhFeS4-WNYqeqa76uVJJMv3_x')">Rekap Nota Dinas</div></div>
-        <div class="col-md-6"><div class="card-bubble" onclick="openLink('https://drive.google.com/drive/folders/13Sh9otz8JNZJohSV8Wgqvf900uKLK7Pk')">Laporan Bulanan</div></div>
-        <div class="col-md-6"><div class="card-bubble" onclick="openLink('https://drive.google.com/drive/folders/12NjhV4GROcWBqbtUNIhK7SN5FYyalDDB')">Laporan Kegiatan</div></div>
-        <div class="col-md-6"><div class="card-bubble" onclick="openLink('https://docs.google.com/spreadsheets/d/1uJ1GKJ2YYaWXPxGJOj6qe_grzT4Z4rl4')">Data Perlintasan</div></div>
+    <div id="pusat" class="section">
+      <div class="row g-4">
+        <div class="col-md-6"><div class="card-bubble">Peta Lintas</div></div>
+        <div class="col-md-6"><div class="card-bubble">Rekap Nota Dinas</div></div>
+        <div class="col-md-6"><div class="card-bubble">Laporan Bulanan</div></div>
+        <div class="col-md-6"><div class="card-bubble">Laporan Kegiatan</div></div>
+        <div class="col-md-6"><div class="card-bubble">Data Perlintasan</div></div>
       </div>
     </div>
 
-    <!-- INPUT DATA -->
-    <div id="inputSection" style="display:none;">
+    <div id="input" class="section">
       <div class="card-bubble text-center">
         FORM INPUT DATA<br><br>
         <button class="btn btn-secondary">Segera Hadir</button>
       </div>
     </div>
 
-    <!-- CHATBOT -->
-    <div id="chatbotSection" style="display:none;">
+    <div id="chatbot" class="section">
       <div class="chat-container">
         <h5>Chatbot AI Satpel</h5>
         <div class="chat-messages" id="chatMessages"></div>
@@ -257,24 +272,37 @@ footer a:hover{
   </div>
 </div>
 
-<!-- ================= FOOTER ================= -->
 <footer>
   © 2026 Balai Teknik Perkeretaapian Kelas II Padang – Satuan Pelayanan Pariaman <br>
   <a href="https://www.instagram.com/btppadang/" target="_blank">Instagram</a> |
   <a href="https://www.youtube.com/@btppadang" target="_blank">YouTube</a>
 </footer>
 
+<!-- MODAL -->
+<div class="modal fade" id="logoutModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center p-4">
+      <h5>Yakin ingin keluar?</h5>
+      <div class="mt-3">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+        <button class="btn btn-danger" onclick="logout()">Ya</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-function showSection(section){
-  document.querySelectorAll('.sidebar-item').forEach(e=>e.classList.remove('active'));
+function showSection(id){
+  document.querySelectorAll('.sidebar-item')
+    .forEach(e=>e.classList.remove('active'));
   event.target.classList.add('active');
 
-  document.getElementById('dashboardSection').style.display='none';
-  document.getElementById('pusatSection').style.display='none';
-  document.getElementById('inputSection').style.display='none';
-  document.getElementById('chatbotSection').style.display='none';
+  document.querySelectorAll('.section')
+    .forEach(e=>e.classList.remove('active'));
 
-  document.getElementById(section+'Section').style.display='block';
+  document.getElementById(id).classList.add('active');
 }
 
 function openLink(url){
@@ -293,14 +321,18 @@ function updateClock(){
 setInterval(updateClock,1000);
 updateClock();
 
-/* CHATBOT DUMMY */
+function toggleDark(){
+  document.body.classList.toggle('dark');
+}
+
 function sendMessage(){
   const input=document.getElementById('chatInput');
   const msg=input.value.trim();
   if(!msg) return;
   const container=document.getElementById('chatMessages');
-  container.innerHTML+="<div><b>Anda:</b> "+msg+"</div>";
-  container.innerHTML+="<div><b>Bot:</b> Pesan diterima.</div><br>";
+  container.innerHTML+=`<div><b>Anda:</b> ${msg}</div>`;
+  container.innerHTML+=`<div><b>Bot:</b> (AI siap dihubungkan API)</div><br>`;
+  container.scrollTop=container.scrollHeight;
   input.value="";
 }
 </script>
