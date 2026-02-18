@@ -1,8 +1,36 @@
-// ===== LOGIN =====
+// ===============================
+// DAFTAR EMAIL ADMIN
+// ===============================
+const adminEmails = [
+  "dwiki.alfitrah070101@gmail.com",
+];
+
+
+// ===============================
+// AUTO REDIRECT JIKA SUDAH LOGIN
+// ===============================
+firebase.auth().onAuthStateChanged(function(user) {
+
+  if (user && window.location.pathname.includes("login.html")) {
+
+    if (adminEmails.includes(user.email)) {
+      window.location.replace("dashboard-admin.html");
+    } else {
+      window.location.replace("dashboard-user.html");
+    }
+  }
+});
+
+
+// ===============================
+// LOGIN FUNCTION
+// ===============================
 function login() {
+
   const emailEl = document.getElementById("email");
   const passwordEl = document.getElementById("password");
   const errorEl = document.getElementById("error");
+  const button = document.querySelector("button[type='submit']");
 
   if (!emailEl || !passwordEl) {
     console.error("Elemen email/password tidak ditemukan");
@@ -13,51 +41,75 @@ function login() {
   const password = passwordEl.value.trim();
 
   if (email === "" || password === "") {
-    if (errorEl) {
-      errorEl.innerText = "Email dan password wajib diisi";
-    }
+    errorEl.innerText = "Email dan password wajib diisi";
     return;
   }
 
+  button.disabled = true;
+  button.innerText = "Memproses...";
+
   firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
+    .then(function(userCredential) {
 
       const user = userCredential.user;
 
-      // ===== ROLE CHECK SEDERHANA =====
-      // Ganti email ini dengan email admin Anda
-      const adminEmail = "admin@email.com";
-
-      if (user.email === adminEmail) {
+      if (adminEmails.includes(user.email)) {
         window.location.replace("dashboard-admin.html");
       } else {
         window.location.replace("dashboard-user.html");
       }
 
     })
-    .catch((error) => {
-      if (errorEl) {
-        errorEl.innerText = "Email atau password salah";
+    .catch(function(error) {
+
+      switch (error.code) {
+
+        case "auth/user-not-found":
+          errorEl.innerText = "Email tidak terdaftar";
+          break;
+
+        case "auth/wrong-password":
+          errorEl.innerText = "Password salah";
+          break;
+
+        case "auth/invalid-email":
+          errorEl.innerText = "Format email tidak valid";
+          break;
+
+        case "auth/too-many-requests":
+          errorEl.innerText = "Terlalu banyak percobaan. Coba lagi nanti.";
+          break;
+
+        default:
+          errorEl.innerText = "Terjadi kesalahan. Coba lagi.";
       }
+
       console.error("Login error:", error.code);
+
+      button.disabled = false;
+      button.innerText = "Masuk";
     });
 }
 
 
-// ===== LOGOUT (VERSI AMAN) =====
+// ===============================
+// LOGOUT FUNCTION
+// ===============================
 function logout() {
   firebase.auth().signOut()
-    .then(() => {
+    .then(function() {
       window.location.replace("index.html");
     })
-    .catch((error) => {
+    .catch(function(error) {
       console.error("Logout error:", error);
-      alert("Logout gagal, silakan coba lagi.");
+      alert("Logout gagal.");
     });
 }
 
 
-// ===== PREVENT BACK BUTTON =====
+// ===============================
+// PREVENT BACK BUTTON
+// ===============================
 (function preventBackCache() {
   if (window.history && window.history.pushState) {
     window.history.pushState(null, "", window.location.href);
