@@ -1,190 +1,297 @@
 <!DOCTYPE html>
 <html lang="id">
-<head> 
-<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-  
+<head>
 <meta charset="UTF-8">
-<title>Dashboard Admin | Satpel Pariaman</title>
+<title>Dashboard User | Satpel Pariaman</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
-<!-- Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --maroon:#7a1f2b;
+  --gold:#d4af37;
+  --blue:#0b3c5d;
+}
+
 body{
-  background:#f2f5f9;
-  font-family:'Poppins',sans-serif;
+  font-family:'Inter',sans-serif;
+  background:#f4f6f9;
+  margin:0;
 }
 
-/* HEADER */
-.header{
-  background:linear-gradient(135deg,#0b3c5d,#114e7a);
+/* TOPBAR */
+.topbar{
+  background:var(--blue);
   color:white;
-  padding:20px 30px;
-  position:relative;
+  padding:18px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-/* AKSEN MINANG (GONJONG HALUS) */
-.header::after{
-  content:"";
-  position:absolute;
-  bottom:-12px;
-  left:0;
-  right:0;
-  height:12px;
-  background:repeating-linear-gradient(
-    60deg,
-    #d4af37,
-    #d4af37 12px,
-    #0b3c5d 12px,
-    #0b3c5d 24px
-  );
+.topbar-title{
+  font-weight:700;
+  font-size:18px;
 }
 
-/* LOGO */
-.logo{
-  height:55px;
+.logout-btn{
+  color:red;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* LAYOUT */
+.main-wrapper{
+  display:flex;
+  min-height:calc(100vh - 120px);
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:230px;
+  background:#0b1f33;
+  color:white;
+  padding-top:25px;
+}
+
+.sidebar-item{
+  padding:14px 25px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.sidebar-item:hover{
+  background:rgba(255,255,255,.08);
+}
+
+.sidebar-item.active{
+  background:var(--maroon);
+}
+
+/* CONTENT */
+.content{
+  flex:1;
+  padding:40px;
+}
+
+/* BUBBLE CARD */
+.card-bubble{
+  border:none;
+  border-radius:18px;
+  padding:40px 20px;
+  text-align:center;
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
+  transition:.25s;
+  cursor:pointer;
+}
+
+.card-bubble:hover{
+  transform:translateY(-6px);
+}
+
+/* SECTION HIDE */
+.section{
+  display:none;
+}
+.section.active{
+  display:block;
+}
+
+/* FOOTER (SAMA INDEX) */
+footer{
+  background:#0b1f33;
+  color:white;
+}
+footer img{
+  height:42px;
   margin-right:10px;
 }
-
-/* TITLE */
-.title{
-  text-align:center;
-}
-.title h3{
-  margin:0;
-  font-weight:700;
-  letter-spacing:1px;
-}
-.title small{
-  font-size:13px;
-  opacity:.9;
-}
-
-/* CLOCK */
-.clock{
-  text-align:right;
-}
-#clock{
-  font-size:18px;
-  font-weight:600;
-}
-#date{
-  font-size:13px;
-}
-
-/* CARD MENU */
-.menu-link{
+footer a{
+  color:#ccc;
   text-decoration:none;
-  color:inherit;
 }
-.menu-card{
-  border:none;
-  border-radius:20px;
-  padding:35px 20px;
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
-  transition:.3s;
-  background:white;
-}
-.menu-card:hover{
-  transform:translateY(-8px);
-}
-.icon-big{
-  font-size:60px;
-  color:#0b3c5d;
+footer a:hover{
+  color:var(--gold);
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="d-flex align-items-center justify-content-between">
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-title">
+    SATUAN PELAYANAN PARIAMAN
+  </div>
 
-    <!-- LOGO KIRI -->
-    <div class="d-flex align-items-center">
-      <img src="assets/logo-kemenhub.png" class="logo" alt="Kemenhub">
-      <img src="assets/logo-btp-padang.png" class="logo" alt="BTP Padang">
+  <div class="d-flex align-items-center gap-4">
+    <div id="clock"></div>
+    <div class="logout-btn" data-bs-toggle="modal" data-bs-target="#logoutModal">
+      LOGOUT
+    </div>
+  </div>
+</div>
+
+<div class="main-wrapper">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-item active" onclick="showSection('dashboard')">Dashboard</div>
+    <div class="sidebar-item" onclick="showSection('pusat')">Pusat Data</div>
+    <div class="sidebar-item" onclick="showSection('input')">Input Data</div>
+    <div class="sidebar-item" onclick="showSection('chatbot')">Chatbot AI</div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="section active">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card card-bubble" onclick="openLink('https://skemaraja.dephub.go.id/')">
+            SKEMA RAJA
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-bubble" onclick="openLink('https://sik.dephub.go.id/')">
+            SISTEM INFORMASI KEMENHUB
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-bubble" onclick="openLink('https://e-kinerja.kemenhub.go.id/')">
+            E-KINERJA
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- TITLE TENGAH -->
-    <div class="title">
-      <h3>SATUAN PELAYANAN PARIAMAN</h3>
-      <small>
-        Balai Teknik Perkeretaapian Kelas II Padang<br>
-        Kementerian Perhubungan Republik Indonesia
-      </small>
+    <!-- PUSAT DATA -->
+    <div id="pusat" class="section">
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card card-bubble" onclick="openLink('https://drive.google.com/drive/folders/1eoIjRHJngsbGNzQo6TNSnDwa6nyTb4KJ')">
+            Peta Lintas
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card card-bubble" onclick="openLink('https://docs.google.com/spreadsheets/d/1pneesRJrhFeS4-WNYqeqa76uVJJMv3_x')">
+            Rekap Nota Dinas
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card card-bubble" onclick="openLink('https://drive.google.com/drive/folders/13Sh9otz8JNZJohSV8Wgqvf900uKLK7Pk')">
+            Laporan Bulanan
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card card-bubble" onclick="openLink('https://drive.google.com/drive/folders/12NjhV4GROcWBqbtUNIhK7SN5FYyalDDB')">
+            Laporan Kegiatan
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card card-bubble" onclick="openLink('https://docs.google.com/spreadsheets/d/1uJ1GKJ2YYaWXPxGJOj6qe_grzT4Z4rl4')">
+            Data Perlintasan
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- JAM KANAN -->
-    <div class="clock">
-      <div id="clock"></div>
-      <div id="date"></div>
+    <!-- INPUT -->
+    <div id="input" class="section">
+      <div class="card card-bubble text-center">
+        FORM INPUT DATA
+      </div>
+    </div>
+
+    <!-- CHATBOT -->
+    <div id="chatbot" class="section">
+      <div class="card card-bubble text-center">
+        CHATBOT AI (SIAP DIKEMBANGKAN)
+      </div>
     </div>
 
   </div>
 </div>
 
-<!-- CONTENT -->
-<div class="container mt-5">
-  <div class="row g-4">
-
-    <!-- DATA PENGADUAN -->
-    <div class="col-md-6">
-      <a href="https://docs.google.com/spreadsheets/d/GANTI_ID_SHEET"
-         target="_blank"
-         class="menu-link">
-        <div class="menu-card text-center">
-          <i class="bi bi-clipboard-data icon-big"></i>
-          <h5 class="mt-3 fw-bold">Data Pengaduan</h5>
-          <p class="text-muted">Laporan pengaduan masyarakat</p>
-        </div>
-      </a>
+<!-- FOOTER (IDENTIK INDEX) -->
+<footer class="pt-5 pb-3">
+  <div class="container">
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <img src="assets/logo-kemenhub.png">
+        <img src="assets/logo-djka.png">
+        <img src="assets/logo-btp-padang.png">
+        <h6 class="mt-3">Balai Teknik Perkeretaapian Kelas II Padang</h6>
+        <p>Satuan Pelayanan Pariaman</p>
+      </div>
+      <div class="col-md-4">
+        <h6>Ikuti Kami</h6>
+        <p>
+          <a href="https://www.instagram.com/btppadang/" target="_blank">
+            <i class="bi bi-instagram"></i> Instagram
+          </a><br>
+          <a href="https://www.youtube.com/@btppadang" target="_blank">
+            <i class="bi bi-youtube"></i> YouTube
+          </a>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <iframe
+          src="https://www.google.com/maps?q=Balai Teknik Perkeretaapian Padang&output=embed"
+          width="100%" height="180" style="border:0;" allowfullscreen>
+        </iframe>
+      </div>
     </div>
-
-    <!-- DOKUMEN -->
-    <div class="col-md-6">
-      <a href="https://drive.google.com"
-         target="_blank"
-         class="menu-link">
-        <div class="menu-card text-center">
-          <i class="bi bi-folder2-open icon-big"></i>
-          <h5 class="mt-3 fw-bold">Dokumen & Arsip</h5>
-          <p class="text-muted">Dokumen internal dan arsip kerja</p>
-        </div>
-      </a>
-    </div>
-
+    <hr>
+    <p class="text-center small">
+      © 2026 Balai Teknik Perkeretaapian Kelas II Padang – Satuan Pelayanan Pariaman
+    </p>
   </div>
+</footer>
 
-  <!-- LOGOUT -->
-  <div class="text-end mt-5">
-    <button onclick="logout()" class="btn btn-danger btn-lg">
-      <i class="bi bi-box-arrow-right"></i> Logout
-    </button>
+<!-- MODAL LOGOUT -->
+<div class="modal fade" id="logoutModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center p-4">
+      <h5>Yakin ingin keluar?</h5>
+      <div class="mt-3">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+        <button class="btn btn-danger" onclick="logout()">Ya</button>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="auth.js"></script>
-<script src="guard.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- CLOCK SCRIPT -->
 <script>
+function showSection(id){
+  document.querySelectorAll('.sidebar-item')
+    .forEach(e=>e.classList.remove('active'));
+  event.target.classList.add('active');
+
+  document.querySelectorAll('.section')
+    .forEach(e=>e.classList.remove('active'));
+
+  document.getElementById(id).classList.add('active');
+}
+
+function openLink(url){
+  window.open(url,'_blank');
+}
+
+function logout(){
+  window.location.replace('index.html');
+}
+
 function updateClock(){
-  const now=new Date();
-  document.getElementById("clock").innerText=
+  const now = new Date();
+  document.getElementById("clock").innerText =
     now.toLocaleTimeString("id-ID");
-  document.getElementById("date").innerText=
-    now.toLocaleDateString("id-ID",{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 }
 setInterval(updateClock,1000);
 updateClock();
@@ -192,4 +299,3 @@ updateClock();
 
 </body>
 </html>
-
