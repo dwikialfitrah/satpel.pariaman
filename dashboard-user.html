@@ -8,121 +8,153 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
+  --navy:#0f1f3d;
   --maroon:#7a1f2b;
 }
 
 body{
   font-family:'Inter',sans-serif;
+  margin:0;
   background:#f4f6f9;
-  min-height:100vh;
   display:flex;
   flex-direction:column;
+  min-height:100vh;
 }
 
-/* ================= HEADER ================= */
-.header{
-  background:var(--maroon);
+/* ================= TOPBAR ================= */
+.topbar{
+  background:var(--navy);
   color:white;
-  padding:20px 40px;
-}
-
-.header-inner{
+  padding:12px 25px;
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
 
-.header-left{
+.topbar-left{
   display:flex;
   align-items:center;
+}
+.topbar-left img{
+  height:35px;
+  margin-right:8px;
+}
+.topbar-title{
+  font-weight:700;
+  margin-left:10px;
+}
+
+.user-menu{
+  position:relative;
   cursor:pointer;
 }
-
-.header-left img{
-  height:44px;
-  margin-right:10px;
-}
-
-/* LOGOUT */
-.btn-logout{
-  background:#b00020;
-  color:white;
-  border:none;
-  border-radius:25px;
-  padding:6px 20px;
-  font-weight:600;
-}
-
-/* ================= CARD ================= */
-.card-menu{
-  background:white;
-  border:none;
-  border-radius:20px;
-  padding:35px;
-  text-align:center;
-  font-weight:600;
-  box-shadow:0 10px 25px rgba(0,0,0,.12);
-  cursor:pointer;
-  transition:.25s;
-  position:relative;
-}
-
-.card-menu:hover{
-  transform:translateY(-8px);
-  box-shadow:0 20px 40px rgba(0,0,0,.2);
-}
-
-/* animasi masuk */
-.card-menu{
-  opacity:0;
-  animation:fadeUp .6s forwards;
-}
-@keyframes fadeUp{
-  to{opacity:1;}
-}
-
-/* ================= PUSAT DATA HOVER ================= */
-.pusat-container{
-  position:relative;
-}
-
-.pusat-list{
-  position:absolute;
-  top:100%;
-  left:0;
-  width:100%;
+.user-dropdown{
   display:none;
-  margin-top:10px;
-  z-index:10;
-}
-
-.pusat-item{
+  position:absolute;
+  right:0;
+  top:30px;
   background:white;
-  padding:12px;
-  border-radius:12px;
-  margin-bottom:8px;
-  box-shadow:0 8px 20px rgba(0,0,0,.15);
-  cursor:pointer;
-  transition:.2s;
+  color:black;
+  padding:10px;
+  border-radius:8px;
+  box-shadow:0 10px 20px rgba(0,0,0,.15);
 }
-
-.pusat-item:hover{
-  background:#f1f1f1;
-}
-
-.pusat-container:hover .pusat-list{
+.user-menu:hover .user-dropdown{
   display:block;
 }
 
-/* ================= FOOTER (DESAIN LAMA DIPERTAHANKAN) ================= */
+/* ================= LAYOUT ================= */
+.main-wrapper{
+  display:flex;
+  flex:1;
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:220px;
+  background:white;
+  box-shadow:2px 0 10px rgba(0,0,0,.05);
+  padding-top:20px;
+}
+
+.sidebar-item{
+  padding:12px 20px;
+  cursor:pointer;
+  font-weight:600;
+  transition:.2s;
+}
+.sidebar-item:hover{
+  background:#f1f1f1;
+}
+.sidebar-item.active{
+  background:var(--maroon);
+  color:white;
+}
+
+/* CONTENT */
+.content{
+  flex:1;
+  padding:40px;
+}
+
+/* CARD BUBBLE */
+.card-bubble{
+  background:white;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,.1);
+  cursor:pointer;
+  transition:.25s;
+  text-align:center;
+  font-weight:600;
+}
+.card-bubble:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 40px rgba(0,0,0,.15);
+}
+
+/* CHATBOT */
+.chat-container{
+  background:white;
+  border-radius:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,.1);
+  padding:20px;
+  height:60vh;
+  display:flex;
+  flex-direction:column;
+}
+.chat-messages{
+  flex:1;
+  overflow-y:auto;
+  margin-bottom:15px;
+}
+.chat-input{
+  display:flex;
+}
+.chat-input input{
+  flex:1;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+.chat-input button{
+  margin-left:10px;
+  border:none;
+  background:var(--maroon);
+  color:white;
+  padding:10px 18px;
+  border-radius:10px;
+}
+
+/* FOOTER */
 footer{
   background:#0b1f33;
   color:white;
+  text-align:center;
   padding:20px;
 }
 footer a{
@@ -137,110 +169,141 @@ footer a:hover{
 
 <body>
 
-<!-- ================= HEADER ================= -->
-<div class="header">
-  <div class="header-inner">
+<!-- ================= TOPBAR ================= -->
+<div class="topbar">
+  <div class="topbar-left">
+    <img src="assets/logo-kemenhub.png">
+    <img src="assets/logo-djka.png">
+    <img src="assets/logo-btp-padang.png">
+    <div class="topbar-title">SATUAN PELAYANAN PARIAMAN</div>
+  </div>
 
-    <div class="header-left" data-bs-toggle="modal" data-bs-target="#logoutModal">
-      <img src="assets/logo-kemenhub.png">
-      <img src="assets/logo-djka.png">
-      <img src="assets/logo-btp-padang.png">
-      <div class="ms-3">
-        <b>Satuan Pelayanan Pariaman</b><br>
-        <small>Balai Teknik Perkeretaapian Kelas II Padang</small>
+  <div class="d-flex align-items-center">
+    <div id="clock" class="me-3"></div>
+    <div class="user-menu">
+      User ▾
+      <div class="user-dropdown">
+        <div onclick="logout()" style="cursor:pointer;">Logout</div>
       </div>
     </div>
-
-    <button class="btn-logout" data-bs-toggle="modal" data-bs-target="#logoutModal">
-      Logout
-    </button>
-
   </div>
 </div>
 
+<div class="main-wrapper">
 
-<!-- ================= DASHBOARD ================= -->
-<div class="container my-5 flex-grow-1">
+  <!-- ================= SIDEBAR ================= -->
+  <div class="sidebar">
+    <div class="sidebar-item active" onclick="showSection('dashboard')">Dashboard</div>
+    <div class="sidebar-item" onclick="showSection('pusat')">Pusat Data</div>
+    <div class="sidebar-item" onclick="showSection('input')">Input Data</div>
+    <div class="sidebar-item" onclick="showSection('chatbot')">Chatbot AI</div>
+  </div>
 
-  <div class="row g-4">
+  <!-- ================= CONTENT ================= -->
+  <div class="content">
 
-    <!-- BARIS 1 -->
-    <div class="col-md-4">
-      <div class="card-menu" onclick="openLink('https://skemaraja.dephub.go.id/')">
-        SKEMA RAJA
+    <!-- DASHBOARD -->
+    <div id="dashboardSection">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card-bubble" onclick="openLink('https://skemaraja.dephub.go.id/')">
+            SKEMA RAJA
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-bubble" onclick="openLink('https://sik.dephub.go.id/')">
+            SISTEM INFORMASI KEMENHUB (SIK)
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-bubble" onclick="openLink('https://e-kinerja.kemenhub.go.id/')">
+            E-KINERJA KEMENHUB
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="col-md-4">
-      <div class="card-menu" onclick="openLink('https://sik.dephub.go.id/')">
-        SISTEM INFORMASI KEMENHUB (SIK)
+    <!-- PUSAT DATA -->
+    <div id="pusatSection" style="display:none;">
+      <div class="row g-3">
+        <div class="col-md-6"><div class="card-bubble" onclick="openLink('https://drive.google.com/drive/folders/1eoIjRHJngsbGNzQo6TNSnDwa6nyTb4KJ')">Peta Lintas</div></div>
+        <div class="col-md-6"><div class="card-bubble" onclick="openLink('https://docs.google.com/spreadsheets/d/1pneesRJrhFeS4-WNYqeqa76uVJJMv3_x')">Rekap Nota Dinas</div></div>
+        <div class="col-md-6"><div class="card-bubble" onclick="openLink('https://drive.google.com/drive/folders/13Sh9otz8JNZJohSV8Wgqvf900uKLK7Pk')">Laporan Bulanan</div></div>
+        <div class="col-md-6"><div class="card-bubble" onclick="openLink('https://drive.google.com/drive/folders/12NjhV4GROcWBqbtUNIhK7SN5FYyalDDB')">Laporan Kegiatan</div></div>
+        <div class="col-md-6"><div class="card-bubble" onclick="openLink('https://docs.google.com/spreadsheets/d/1uJ1GKJ2YYaWXPxGJOj6qe_grzT4Z4rl4')">Data Perlintasan</div></div>
       </div>
     </div>
 
-    <div class="col-md-4">
-      <div class="card-menu" onclick="openLink('https://e-kinerja.kemenhub.go.id/')">
-        E-KINERJA KEMENHUB
+    <!-- INPUT DATA -->
+    <div id="inputSection" style="display:none;">
+      <div class="card-bubble text-center">
+        FORM INPUT DATA<br><br>
+        <button class="btn btn-secondary">Segera Hadir</button>
       </div>
     </div>
 
-
-    <!-- BARIS 2 (2 BUBBLE BESAR) -->
-    <div class="col-md-6">
-      <div class="card-menu" onclick="alert('Segera hadir')">
-        INPUT DATA
-      </div>
-    </div>
-
-    <div class="col-md-6 pusat-container">
-      <div class="card-menu">
-        PUSAT DATA
-      </div>
-
-      <div class="pusat-list">
-        <div class="pusat-item" onclick="openLink('https://drive.google.com/drive/folders/1eoIjRHJngsbGNzQo6TNSnDwa6nyTb4KJ')">Peta Lintas</div>
-        <div class="pusat-item" onclick="openLink('https://docs.google.com/spreadsheets/d/1pneesRJrhFeS4-WNYqeqa76uVJJMv3_x')">Rekap Nota Dinas</div>
-        <div class="pusat-item" onclick="openLink('https://drive.google.com/drive/folders/13Sh9otz8JNZJohSV8Wgqvf900uKLK7Pk')">Laporan Bulanan</div>
-        <div class="pusat-item" onclick="openLink('https://drive.google.com/drive/folders/12NjhV4GROcWBqbtUNIhK7SN5FYyalDDB')">Laporan Kegiatan</div>
-        <div class="pusat-item" onclick="openLink('https://docs.google.com/spreadsheets/d/1uJ1GKJ2YYaWXPxGJOj6qe_grzT4Z4rl4')">Data Perlintasan</div>
+    <!-- CHATBOT -->
+    <div id="chatbotSection" style="display:none;">
+      <div class="chat-container">
+        <h5>Chatbot AI Satpel</h5>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input">
+          <input type="text" id="chatInput" placeholder="Tulis pesan...">
+          <button onclick="sendMessage()">Kirim</button>
+        </div>
       </div>
     </div>
 
   </div>
 </div>
-
 
 <!-- ================= FOOTER ================= -->
-<footer class="text-center">
+<footer>
   © 2026 Balai Teknik Perkeretaapian Kelas II Padang – Satuan Pelayanan Pariaman <br>
   <a href="https://www.instagram.com/btppadang/" target="_blank">Instagram</a> |
   <a href="https://www.youtube.com/@btppadang" target="_blank">YouTube</a>
 </footer>
 
-
-<!-- ================= MODAL ================= -->
-<div class="modal fade" id="logoutModal">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-center p-3">
-      <h5>Yakin ingin logout?</h5>
-      <div class="mt-3">
-        <button class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-        <button class="btn btn-danger" onclick="logout()">Ya</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <script>
+function showSection(section){
+  document.querySelectorAll('.sidebar-item').forEach(e=>e.classList.remove('active'));
+  event.target.classList.add('active');
+
+  document.getElementById('dashboardSection').style.display='none';
+  document.getElementById('pusatSection').style.display='none';
+  document.getElementById('inputSection').style.display='none';
+  document.getElementById('chatbotSection').style.display='none';
+
+  document.getElementById(section+'Section').style.display='block';
+}
+
 function openLink(url){
   window.open(url,'_blank');
 }
+
 function logout(){
   window.location.replace('index.html');
 }
-</script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+function updateClock(){
+  const now=new Date();
+  document.getElementById('clock').innerText=
+  now.toLocaleDateString('id-ID')+" "+now.toLocaleTimeString('id-ID');
+}
+setInterval(updateClock,1000);
+updateClock();
+
+/* CHATBOT DUMMY */
+function sendMessage(){
+  const input=document.getElementById('chatInput');
+  const msg=input.value.trim();
+  if(!msg) return;
+  const container=document.getElementById('chatMessages');
+  container.innerHTML+="<div><b>Anda:</b> "+msg+"</div>";
+  container.innerHTML+="<div><b>Bot:</b> Pesan diterima.</div><br>";
+  input.value="";
+}
+</script>
 
 </body>
 </html>
